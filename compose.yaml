@@ -1,0 +1,21 @@
+services:
+  tasks-api:
+    build: services/tasks-api
+    ports:
+      - "5000:5000"
+    environment:
+      NORMALIZER_URL: http://title-normalizer:5001
+  title-normalizer:
+    build: services/title-normalizer
+    ports:
+      - "5001:5001"
+  prometheus:
+    image: prom/prometheus:v3.16.0
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus:/etc/prometheus:ro
+  grafana:
+    image: grafana/grafana:13.3.1
+    ports:
+      - "3000:3000"

@@ -1,0 +1,10 @@
+groups:
+  - name: tasks-api
+    rules:
+      - alert: TasksErrors
+        expr: >-
+          sum(rate(http_requests_total{endpoint=~"/tasks.*",status=~"4..|5.."}[1m]))
+          > 0
+        for: 30s
+        annotations:
+          summary: Requests to /tasks return errors
