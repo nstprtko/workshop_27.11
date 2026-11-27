@@ -1,0 +1,21 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: title-normalizer
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: title-normalizer
+  template:
+    metadata:
+      labels:
+        app: title-normalizer
+    spec:
+      containers:
+        - name: title-normalizer
+          image: title-normalizer:local
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 5001
